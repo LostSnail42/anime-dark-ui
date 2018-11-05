@@ -1,6 +1,11 @@
 @import "./skin-settings.less";
 @import "./transition.less";
 
+
+@ui-theme-name: anime-dark-plus-ui;
+
+@theme-tabWidth: ~'theme-@{ui-theme-name}-tabWidth';
+
 //current git branch (tooltype)
 .tooltip-inner {
 	max-width: 500px;
@@ -42,7 +47,7 @@
 
 .welcome {
 	color: inherit;
-    background-color: rgba(0, 0, 0, 0.1);
+	background-color: rgba(0, 0, 0, 0.1);
 }
 
 .welcome-logo {
@@ -130,7 +135,7 @@ atom-workspace-axis.horizontal{
 	//background when selection || selected
 	atom-text-editor .gutter .line-number.cursor-line {
 		color: @number-bar-selected-color;
-    	background-color: @number-bar-selected-background;
+		background-color: @number-bar-selected-background;
 		border-right: @number-bar-selected-border-right;
 	}
 
@@ -156,11 +161,11 @@ atom-workspace-axis.horizontal{
 	/**************/
 
 	.scrollbars-visible-always atom-text-editor ::-webkit-scrollbar-track {
-    	background: rgba(40, 44, 52, 0);
+		background: rgba(40, 44, 52, 0);
 	}
 	.scrollbars-visible-always atom-text-editor ::-webkit-scrollbar-thumb {
-	    border-color: rgb(0, 0, 0, 0);
-    	background: #7cf8ae;
+		border-color: rgb(0, 0, 0, 0);
+		background: #7cf8ae;
 		border-radius:10px;
 	}
 	.scrollbars-visible-always atom-text-editor ::-webkit-scrollbar-corner {
@@ -183,15 +188,15 @@ atom-workspace-axis.horizontal{
 /*                       Ctrl + F                       */
 /********************************************************/
 	.tool-panel, .panel, atom-panel {
-	    background-color: rgba(0, 0, 0, 0.3);
+		background-color: rgba(0, 0, 0, 0.3);
 	}
 
 	atom-text-editor[mini].editor.mini {
-	    background-color: hsl(210, 9%, 23%);
+		background-color: hsl(210, 9%, 23%);
 	}
-    //Highlights
+	//Highlights
 	atom-text-editor .find-result .region.region.region, atom-text-editor .current-result .region.region.region {
-	    background-color: rgba(82, 139, 255, 0.13);
+		background-color: rgba(82, 139, 255, 0.13);
 	}
 
 /********************************************************/
@@ -210,28 +215,28 @@ atom-workspace-axis.horizontal{
 
 	//Main background
 	section.settings-panel,div.panels-item,atom-pane-container atom-pane .item-views .pane-item:not(.styleguide){
-    	background-color: @invisible;
-    }
+		background-color: @invisible;
+	}
 
    //Content background
-    atom-pane-container atom-pane .item-views .pane-item:not(.styleguide) div.panels {
-    	background-color: rgba(0, 0, 0, 0.8);
-    }
+	atom-pane-container atom-pane .item-views .pane-item:not(.styleguide) div.panels {
+		background-color: rgba(0, 0, 0, 0.8);
+	}
 
-    //bar-left
-    atom-pane-container atom-pane .item-views .pane-item:not(.styleguide) div.config-menu {
-    	background-color: rgba(0, 0, 0, 0.7);
-    }
+	//bar-left
+	atom-pane-container atom-pane .item-views .pane-item:not(.styleguide) div.config-menu {
+		background-color: rgba(0, 0, 0, 0.7);
+	}
 
 	//bar-left hovered item
-    atom-pane-container atom-pane .item-views .pane-item:not(.styleguide) div.config-menu ul li:hover a {
-    	background-color: rgba(10, 30, 50, 0.5);
-    }
+	atom-pane-container atom-pane .item-views .pane-item:not(.styleguide) div.config-menu ul li:hover a {
+		background-color: rgba(10, 30, 50, 0.5);
+	}
 
 	//bar-left selected item
-    atom-pane-container atom-pane .item-views .pane-item:not(.styleguide) div.config-menu ul li.active a{
-    	background-color: rgba(10, 50, 50, 0.5);
-    }
+	atom-pane-container atom-pane .item-views .pane-item:not(.styleguide) div.config-menu ul li.active a{
+		background-color: rgba(10, 50, 50, 0.5);
+	}
 
 	//Open config folder button
 	atom-pane-container atom-pane .item-views .pane-item {
@@ -240,9 +245,9 @@ atom-workspace-axis.horizontal{
 
 	//Setting Selector
 	.settings-view select.form-control {
-    	color: #ccc;
-    	border-color: #777;
-    	background-color: #333;
+		color: #ccc;
+		border-color: #777;
+		background-color: #333;
 	}
 
 	.settings-view select.form-control:hover, .settings-view select.form-control:focus {
@@ -250,8 +255,8 @@ atom-workspace-axis.horizontal{
 	}
 
 	.settings-view .themes-picker-item .btn {
-    	height: 32px;
-    	padding-top: 4px; //This value is ok on a full HD screen but may be modified for smaller screen
+		height: 32px;
+		padding-top: 4px; //This value is ok on a full HD screen but may be modified for smaller screen
 	}
 
 	/**************/
@@ -259,11 +264,11 @@ atom-workspace-axis.horizontal{
 	/**************/
 
 	.settings-view ::-webkit-scrollbar-track {
-    	background: rgba(40, 44, 52, 0);
+		background: rgba(40, 44, 52, 0);
 	}
 	.settings-view ::-webkit-scrollbar-thumb {
-	    border-color: rgb(0, 0, 0, 0);
-    	background: #7cf8ae;
+		border-color: rgb(0, 0, 0, 0);
+		background: #7cf8ae;
 		border-radius:10px;
 	}
 	.settings-view ::-webkit-scrollbar-corner {
@@ -290,28 +295,28 @@ atom-workspace-axis.horizontal{
 		color: #87a3ac;
 		font-weight: normal;
 	}
-    //settings text
-    .settings-view .scroll-view {
-        color:#bbb;
-        margin-left:10px
-    }
-    .settings-view {
-        //header
-        section .section-heading, .section .section-heading {
-            color:white;
-        }
-        //main
-        .text {
-            color:hsl(0, 0%, 75%);
-        }
+	//settings text
+	.settings-view .scroll-view {
+		color:#bbb;
+		margin-left:10px
+	}
+	.settings-view {
+		//header
+		section .section-heading, .section .section-heading {
+			color:white;
+		}
+		//main
+		.text {
+			color:hsl(0, 0%, 75%);
+		}
 
-        //Setting title
-        .checkbox .setting-title {
-            color:#83bcd9;
-        }
-        .placeholder-text {
-            color:#999;
-        }
+		//Setting title
+		.checkbox .setting-title {
+			color:#83bcd9;
+		}
+		.placeholder-text {
+			color:#999;
+		}
 
 		.settings-panel label {
 			color:#444;
@@ -340,12 +345,12 @@ atom-workspace-axis.horizontal{
 			color:#51cda6;
 		}
 
-    }
+	}
 
-    //workspace text color (file / tab and more)
+	//workspace text color (file / tab and more)
 	atom-workspace {
-        color:hsl(0, 0%, 75%);
-    }
+		color:hsl(0, 0%, 75%);
+	}
 
 	a.icon, a {
 		color:hsl(0, 0%, 50%);
@@ -364,23 +369,23 @@ atom-workspace-axis.horizontal{
 		color:#718f91;
 	}
 
-    //Tree view
+	//Tree view
 	atom-workspace .list-item {
-        transition: 0.3s linear;
+		transition: 0.3s linear;
 	}
-    atom-workspace .list-item:not(.status-modified):not(.status-added):not(:hover) {
-        color:#bfbfbf;
-    }
-    atom-workspace .list-item:hover {
-        color:hsl(0, 0%, 95%);
-    }
-    atom-workspace .list-item.status-modified:hover {
-        color: hsl(23, 100%, 82%);
-    }
+	atom-workspace .list-item:not(.status-modified):not(.status-added):not(:hover) {
+		color:#bfbfbf;
+	}
+	atom-workspace .list-item:hover {
+		color:hsl(0, 0%, 95%);
+	}
+	atom-workspace .list-item.status-modified:hover {
+		color: hsl(23, 100%, 82%);
+	}
 
-    atom-workspace .list-item.status-added:hover {
-        color: hsl(146, 100%, 72%)
-    }
+	atom-workspace .list-item.status-added:hover {
+		color: hsl(146, 100%, 72%)
+	}
 
 	.status-modified:not(:hover) {
 		color:#f78a46;
@@ -389,10 +394,10 @@ atom-workspace-axis.horizontal{
 		color:#1fe977;
 	}
 
-    //bottom tabs
-    .grammar-status a, .grammar-status a:hover, .encoding-status a, .encoding-status a:hover, status-bar .cursor-position a, status-bar .cursor-position a:hover, status-bar a, status-bar a:hover {
-        color:hsl(0, 0%, 75%);
-    }
+	//bottom tabs
+	.grammar-status a, .grammar-status a:hover, .encoding-status a, .encoding-status a:hover, status-bar .cursor-position a, status-bar .cursor-position a:hover, status-bar a, status-bar a:hover {
+		color:hsl(0, 0%, 75%);
+	}
 
 @atome-dock-arrow-color : rgba(70,70,70, 0.7);
 
@@ -401,113 +406,141 @@ atom-workspace-axis.horizontal{
 
 //Dock arrows (> and <)
 .atom-dock-toggle-button .atom-dock-toggle-button-inner{
-    background:@atome-dock-arrow-color;
-    background-color:@atome-dock-arrow-color;
-    border: 1px solid @atome-dock-arrow-color;
-    color:rgba(200, 200, 200, 0.8);
+	background:@atome-dock-arrow-color;
+	background-color:@atome-dock-arrow-color;
+	border: 1px solid @atome-dock-arrow-color;
+	color:rgba(200, 200, 200, 0.8);
 }
 
 
 
 //Pan tab-bar
 .atom-dock-content-wrapper {
-    .left {
-        margin-right:-5px;
-    }
-    .right{
-        margin-left:-5px;
-    }
+	.left {
+		margin-right:-5px;
+	}
+	.right{
+		margin-left:-5px;
+	}
 }
 //pan resize
 .atom-dock-resize-handle{
-    position:relative;
-    z-index:3;
+	position:relative;
+	z-index:3;
 }
 .atom-dock-resize-handle.left{
-    left:-5px;
+	left:-5px;
 }
 .atom-dock-resize-handle.right {
-    right:-5px;
+	right:-5px;
 }
 .atom-dock-resize-handle.bottom {
-    bottom:-5px;
+	bottom:-5px;
 }
 
 //Tab Bar
 
 .tab-bar {
-    background-color:rgba(255, 255, 255, 0.08);
-    height: 22px;
-    transition:1s linear background-color;
+	background-color:rgba(255, 255, 255, 0.08);
+	height: 22px;
+	transition:1s linear background-color;
 
-    div {
-        font-size:13px;
-        position:relative;
-        text-align: center;
-    }
-    li {
-        border-left:1px black solid;
-        border-right:1px black solid;
-    }
-    li.active {
-        background-color:hsla(174, 82%, 100%, 0.2);
-        color:hsl(0,0%,90%)
-    }
 
-    //modified icon
-    .tab.modified:not(:hover) .close-icon {
-        border-color:hsla(151, 71%, 69%, 0.93);
-    }
+	
+	div {
+		font-size:13px;
+		position:relative;
+		text-align: center;
+	}
+	li {
+		border-left:1px black solid;
+		border-right:1px black solid;
+	}
+	li.active {
+		background-color:hsla(174, 82%, 100%, 0.2);
+		color:hsl(0,0%,90%)
+	}
+	
+	//modified icon
+	.tab.modified:not(:hover) .close-icon {
+		border-color:hsla(151, 71%, 69%, 0.93);
+	}
 
-    //Mask the cross for on unactive tabs
-    .tab .close-icon {
-        visibility:hidden;
-    }
+	//Mask the cross for on unactive tabs
+	.tab .close-icon {
+		visibility:hidden;
+	}
 
-    //Show the cross for on unactive tabs :hover
-    :hover .close-icon {
-        visibility:visible;
-    }
+	//Show the cross for on unactive tabs :hover
+	:hover .close-icon {
+		visibility:visible;
+	}
 
-    //Modified tab content (file)
-    .tab.modified:not(:hover) .close-icon {
-        visibility:visible;
-    }
+	//Modified tab content (file)
+	.tab.modified:not(:hover) .close-icon {
+		visibility:visible;
+	}
 }
+
+
+[@{theme-tabWidth}="full"] .tab-bar
+{
+	overflow-x: auto;
+	
+	.tab,
+	.tab.active
+	{
+		flex: 0 0 auto;
+		min-width: 2.2em;
+		max-width: none;
+		min-height: @font-size;
+	}
+	
+	atom-dock
+	{
+		.tab,
+		.tab.active
+		{
+			max-width: none;
+		}
+	}
+}
+
+
 .tab-bar[h="22px"] {
-    height: 22px;
-    .icon::before {
-        font-size:14px;
-        top: 10px;
-    }
+	height: 24px;
+	.icon::before {
+		font-size:14px;
+		top: 10px;
+	}
 
-    div {
-        font-size:13px;
-    }
+	div {
+		font-size:13px;
+	}
 
-    .tab.modified:not(:hover) .close-icon {
-        top:7px;
-        bottom:7px;
-    }
+	.tab.modified:not(:hover) .close-icon {
+		top:7px;
+		bottom:7px;
+	}
 }
 
 .tab-bar[h="30px"] {
-    height: 30px;
-    div {
-        font-size:14px;
-        top:3px
-    }
+	height: 30px;
+	div {
+		font-size:14px;
+		top:3px
+	}
 
-    .tab.modified:not(:hover) .close-icon {
-        top:11px;
-        bottom:11px;
-    }
+	.tab.modified:not(:hover) .close-icon {
+		top:11px;
+		bottom:11px;
+	}
 }
 
 //Pan Divider
 .atom-dock-resize-handle, .atom-dock-resize-handle-resizable {
-    background-color:rgba(121, 120, 131, 0);
-    width:1px;
+	background-color:rgba(121, 120, 131, 0);
+	width:1px;
 }
 
 /********************************************************/
@@ -530,10 +563,10 @@ atom-workspace-axis.horizontal{
 }
 
 .github-CommitView .hard-wrap-icons {
-    opacity:0
+	opacity:0
 }
 .github-CommitView .hard-wrap-icons:hover {
-    opacity:0
+	opacity:0
 }
 
 .github-StubItem-git-tab-controller.github-GitTabItem-root {
@@ -653,14 +686,14 @@ atom-workspace-axis.horizontal{
 	/*****************/
 
 	.tab-bar .syntax--tab:before {
-	    position: absolute;
-	    pointer-events: none;
-	    z-index: 2;
-	    top: 0;
-	    left: -1px;
-	    bottom: 0;
-	    width: 2px;
-	    background: rgba(0, 0, 0, 0.5);
+		position: absolute;
+		pointer-events: none;
+		z-index: 2;
+		top: 0;
+		left: -1px;
+		bottom: 0;
+		width: 2px;
+		background: rgba(0, 0, 0, 0.5);
 		transition: 0.7s
 	}
 	.tab-bar .syntax--tab:hover:before{
@@ -671,7 +704,7 @@ atom-workspace-axis.horizontal{
 		background: #7cf8ae;
 	}
 	.tab-bar .syntax--tab.syntax--modified:not(:hover) .close-icon {
-	    color: rgba(124, 248, 174, 0.75);
+		color: rgba(124, 248, 174, 0.75);
 	}
 
 /************************************/
@@ -696,9 +729,9 @@ atom-workspace-axis.horizontal{
 	}
 
 	.tree-view:focus .selected:before {
-    	background: rgba(58, 107, 122, 1);
+		background: rgba(58, 107, 122, 1);
 	}
 
 	.tree-view .selected:before {
-	    background: rgba(58, 107, 122, 0.53);
+		background: rgba(58, 107, 122, 0.53);
 	}

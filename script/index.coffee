@@ -1,55 +1,112 @@
 background_interval = -1;
 currentBackground = -1;
-theme = "anime-dark-ui"
+theme = "anime-dark-plus-ui"
 transTimeout = -1;
+root = document.documentElement;
+newEntryTemp = "";
+
 
 
 module.exports =
-    activate: (state) ->
-        transElm.add();
+	activate: (state) ->
+		transElm.add();
 
-        atom.config.observe "#{theme}.tab", (value) ->
-            setTab(value);
-        atom.config.observe "#{theme}.timing.timer", (timer) ->
+		submitNewBg = document.getElementById("#{theme}.dynamicBg.submit");
 
-            backgrounds = loadBackground();
+		# window.webContents.executeJavaScript(`document.querySelector('input[id="anime-dark-plus-ui.dynamicBg.submit"]')`, (result) {
+		# 		console.log(result)
+		# 	})
+		
+		#submitNewBg = document.querySelector("input[id=\"#{name}.dynamicBg.submit\"]");
 
-            # -- Timer > 0 -- #
-            if timer != 0 && backgrounds.length != 0
-                setBGinter(timer);
+		console.log(submitNewBg);
 
-            #-- Random Background --#
-            else if backgrounds.length != 0
-                unsetBGinter();
+		#submitNewBg.type = "button";
 
-                try
-                    clearTimeout(transTimeout)
-                catch error
+		#atom.config.set("#{theme}.arrayTest", ["test1", "test2", "test3"]);
+
+		# testBg = atom.config.get("#{theme}.dynamicBg. .4");
+		
+		# atom.config.set("#{theme}.dynamicBg. .4", "Test4");
+		
+		# numDynBg = 0;
+		
+		# while testBg[1][numDynBg] != undefined
+		# 	numDynBg++;
+		
+		# console.log(testBg);
+		
+		# testBg.appendChild("'default': 'null', 'type': 'string'");
+
+		#atom.config.observe "#{theme}.arrayTest", (value) ->
+		#	;
+
+		atom.config.observe "#{theme}.tab", (value) ->
+			setTab(value);
+		atom.config.observe "#{theme}.tabWidth", (value) ->
+			set_tab_width(value);
+
+		atom.config.observe "#{theme}.timing.timer", (timer) ->
+
+			backgrounds = loadBackground();
+
+			# -- Timer > 0 -- #
+			if timer != 0 && backgrounds.length != 0
+				setBGinter(timer);
+
+			#-- Random Background --#
+			else if backgrounds.length != 0
+				unsetBGinter();
+
+				try
+					clearTimeout(transTimeout)
+				catch error
 
 
-                newBackground = currentBackground;
-                while currentBackground == newBackground
-                    newBackground = Math.floor(Math.random() * backgrounds.length);
+				newBackground = currentBackground;
+				while currentBackground == newBackground
+					newBackground = Math.floor(Math.random() * backgrounds.length);
 
-                currentBackground = newBackground;
+				currentBackground = newBackground;
 
-                setBackground(backgrounds[newBackground]);
-            else
-                setBackground(backgrounds[0]);
+				setBackground(backgrounds[newBackground]);
+			else
+				setBackground(backgrounds[0]);
 
-        atom.config.observe "#{theme}.darkObject.dark", (value) ->
-            setDarkBG(value);
+		atom.config.observe "#{theme}.darkObject.dark", (value) ->
+			setDarkBG(value);
 
-        atom.config.observe "#{theme}.darkObject.dark_settings", (value) ->
-            setDarkBGSettings(value)
+		atom.config.observe "#{theme}.darkObject.dark_settings", (value) ->
+			setDarkBGSettings(value);
 
-    desactivate: ->
-        transElm.remove();
-        unsetTab();
-        unsetBGinter();
-        unsetBackground();
-        removeDarkBG();
-        removeDarkBGSettings();
+		#atom.config.observe "#{theme}.dynamicBg.new", (value) ->
+		atom.config.observe "#{theme}.dynamicBg.submit", (value) ->
+			index = 1;
+			newEntry = atom.config.get "#{theme}.dynamicBg.new";
+			if(newEntry == undefined || newEntry == "<Enter Image URI>")
+				console.log("Not submitting blank entry");
+				return;
+			
+			entry = atom.config.get "#{theme}.dynamicBg. .#{index}";
+			while entry != undefined
+				console.log("Entry: " + entry);
+				index++;
+				entry = atom.config.get "#{theme}.dynamicBg. .#{index}";
+			if(index == undefined)
+				console.log("Error: Index undefined");
+				return;
+			console.log("New Index: " + index);
+			add_new_bg_entry(newEntry, index);
+			atom.config.set "#{theme}.dynamicBg.new", "<Enter Image URI>";
+			atom.config.set "#{theme}.dynamicBg.submit", false;
+
+	desactivate: ->
+		transElm.remove();
+		unsetTab();
+		unsetBGinter();
+		unsetBackground();
+		removeDarkBG();
+		removeDarkBGSettings();
 
 
 
@@ -60,18 +117,18 @@ module.exports =
 # -- Transition -- #
 
 transElm = {
-    it: () ->
-        return document.querySelector("body bg-transition");
+	it: () ->
+		return document.querySelector("body bg-transition");
 
-    add: () ->
-        document.body.appendChild(transElm.it() || document.createElement("bg-transition"))
-    remove: () ->
-        document.querySelectorAll("body bg-transition").forEach (e) ->
-            document.body.removeChild(e);
+	add: () ->
+		document.body.appendChild(transElm.it() || document.createElement("bg-transition"))
+	remove: () ->
+		document.querySelectorAll("body bg-transition").forEach (e) ->
+			document.body.removeChild(e);
 
-        try
-            clearTimeout(transTimeout)
-        catch error
+		try
+			clearTimeout(transTimeout)
+		catch error
 
 }
 
@@ -79,25 +136,25 @@ transElm = {
 
 setTransition = (url) ->
 
-    if (transElm.it() == null)
-        transElm.add();
+	if (transElm.it() == null)
+		transElm.add();
 
-    if (transElm.it() == null)
-        return atom.notifications.addInfo("Cannot add the transition element, please restart your Atom");
+	if (transElm.it() == null)
+		return atom.notifications.addInfo("Cannot add the transition element, please restart your Atom");
 
-    transTimeout = setTimeout(() ->
-        if (url != undefined)
-            url = url.replace(/\\/g,"/");
-            transElm.it().style.backgroundImage = "url( \"#{url} \")";
-            transElm.it().style.transition = "none";
-            transElm.it().style.opacity = "1";
-        clearTimeout(transTimeout);
-    ,atom.config.get( "#{theme}.timing.transiton") * 1000)
+	transTimeout = setTimeout(() ->
+		if (url != undefined)
+			url = url.replace(/\\/g,"/");
+			transElm.it().style.backgroundImage = "url( \"#{url} \")";
+			transElm.it().style.transition = "none";
+			transElm.it().style.opacity = "1";
+		clearTimeout(transTimeout);
+	,atom.config.get( "#{theme}.timing.transiton") * 1000)
 
 
 playTransition = () ->
-    transElm.it().style.transition = "#{atom.config.get "#{theme}.timing.transiton"}s linear opacity";
-    transElm.it().style.opacity = "0";
+	transElm.it().style.transition = "#{atom.config.get "#{theme}.timing.transiton"}s linear opacity";
+	transElm.it().style.opacity = "0";
 
 
 
@@ -108,56 +165,58 @@ playTransition = () ->
 # -- Tab type -- #
 
 setTab = (value) ->
-    if value == "soft"
-        document.querySelectorAll(".tab-bar").forEach (elm) ->
-            elm.setAttribute("h","22px")
-    else
-        document.querySelectorAll(".tab-bar").forEach (elm) ->
-            elm.setAttribute("h","30px")
+	if value == "soft"
+		document.querySelectorAll(".tab-bar").forEach (elm) ->
+			elm.setAttribute("h","22px")
+	else
+		document.querySelectorAll(".tab-bar").forEach (elm) ->
+			elm.setAttribute("h","30px")
 
 
 
 unsetTab = () ->
-    document.querySelectorAll(".tab-bar").forEach (elm) ->
-        elm.removeNamedItem("h")
+	document.querySelectorAll(".tab-bar").forEach (elm) ->
+		elm.removeNamedItem("h")
 
 
+set_tab_width = (value) ->
+	root.setAttribute("theme-#{theme}-tabWidth", value.toLowerCase())
 
-
-
+#unset_tab_width = () ->
+#TODO: FIXME
 
 
 # -- set Background -- #
 
 setBackground = (url) ->
-    if (url != undefined)
-        url = url.replace(/\\/g,"/")
-        document.body.style.backgroundImage = "url( \"#{url} \")";
-        #document.body.style.transition = "#{atom.config.get "#{theme}.timing.transiton"}s linear background-image";
-        console.log("new background detected: \"#{url}\"");
+	if (url != undefined)
+		url = url.replace(/\\/g,"/")
+		document.body.style.backgroundImage = "url( \"#{url} \")";
+		#document.body.style.transition = "#{atom.config.get "#{theme}.timing.transiton"}s linear background-image";
+		console.log("new background detected: \"#{url}\"");
 
 
 
 loadBackground = () ->
-    backgrounds = atom.config.get "#{theme}.backgrounds";
-    i = -1;
-    backgrounds.array = [];
-    while i < 10
-        i += 1;
-        backgrounds.array.push(backgrounds[i])
+	backgrounds = atom.config.get "#{theme}.backgrounds";
+	i = -1;
+	backgrounds.array = [];
+	while i < 10
+		i += 1;
+		backgrounds.array.push(backgrounds[i])
 
-    backgrounds = backgrounds.array;
+	backgrounds = backgrounds.array;
 
-    # remove "null" parameters
-    backgrounds = backgrounds.filter (f) ->
-        return f && f != "null";
+	# remove "null" parameters
+	backgrounds = backgrounds.filter (f) ->
+		return f && f != "null";
 
-    return backgrounds;
+	return backgrounds;
 
 
 
 unsetBackground = () ->
-    document.body.style.backgroundImage = "unset"
+	document.body.style.backgroundImage = "unset"
 
 
 
@@ -168,43 +227,43 @@ unsetBackground = () ->
 # -- timer -- #
 
 setBGinter = (timer) ->
-    console.log("setBGinter() called");
-    if background_interval != 0
-        clearInterval(background_interval);
-    else
-        backgrounds = loadBackground();
+	console.log("setBGinter() called");
+	if background_interval != 0
+		clearInterval(background_interval);
+	else
+		backgrounds = loadBackground();
 
-        newBackground = currentBackground;
-        while currentBackground == newBackground
-            newBackground = Math.floor(Math.random() * backgrounds.length);
+		newBackground = currentBackground;
+		while currentBackground == newBackground
+			newBackground = Math.floor(Math.random() * backgrounds.length);
 
-        currentBackground = newBackground;
-        setTransition(backgrounds[currentBackground]);
-        playTransition();
-        setBackground(backgrounds[currentBackground]);
+		currentBackground = newBackground;
+		setTransition(backgrounds[currentBackground]);
+		playTransition();
+		setBackground(backgrounds[currentBackground]);
 
-    background_interval = setInterval(
-        ()->
-            backgrounds = loadBackground();
+	background_interval = setInterval(
+		()->
+			backgrounds = loadBackground();
 
-            newBackground = currentBackground;
-            while currentBackground == newBackground
-                newBackground = Math.floor(Math.random() * backgrounds.length);
+			newBackground = currentBackground;
+			while currentBackground == newBackground
+				newBackground = Math.floor(Math.random() * backgrounds.length);
 
-            currentBackground = newBackground;
-            setTransition(backgrounds[newBackground]);
-            playTransition();
-            setBackground(backgrounds[newBackground]);
+			currentBackground = newBackground;
+			setTransition(backgrounds[newBackground]);
+			playTransition();
+			setBackground(backgrounds[newBackground]);
 
-        , 60000 * timer;
-    )
+		, 60000 * timer;
+	)
 
 
 
 unsetBGinter = () ->
-    if background_interval != 0
-        clearInterval(background_interval);
-    background_interval = 0;
+	if background_interval != 0
+		clearInterval(background_interval);
+	background_interval = 0;
 
 
 
@@ -215,11 +274,11 @@ unsetBGinter = () ->
 # -- Background color opacity -- #
 
 setDarkBG = (alpha) ->
-    document.querySelector("atom-workspace.workspace.scrollbars-visible-always").style.backgroundColor = "rgba(0, 0, 0, #{alpha / 100})"
-    console.log("darkBG alpha is now #{alpha}%")
+	document.querySelector("atom-workspace.workspace.scrollbars-visible-always").style.backgroundColor = "rgba(0, 0, 0, #{alpha / 100})"
+	console.log("darkBG alpha is now #{alpha}%")
 
 removeDarkBG = () ->
-    document.querySelector("atom-workspace.workspace.scrollbars-visible-always").style.backgroundColor = "unset"
+	document.querySelector("atom-workspace.workspace.scrollbars-visible-always").style.backgroundColor = "unset"
 
 
 
@@ -229,33 +288,39 @@ removeDarkBG = () ->
 # -- Setting Background color opacity -- #
 
 setDarkBGSettings = (alpha) ->
-    if document.querySelector("style.animeDarkUi.setDarkBGSettings")
-        document.querySelector("style.animeDarkUi.setDarkBGSettings").innerHTML =
-        "
-            atom-pane-container atom-pane .item-views .pane-item:not(.styleguide) div.panels {\n
-                \tbackground-color:rgba(0, 0, 0, #{alpha / 100});\n
-            }\n
-            atom-pane-container atom-pane .item-views .pane-item:not(.styleguide) div.config-menu {\n
-                \tbackground-color:rgba(0, 0, 0, #{(alpha - 10) / 100});\n
-            }
-        "
+	if document.querySelector("style.animeDarkUi.setDarkBGSettings")
+		document.querySelector("style.animeDarkUi.setDarkBGSettings").innerHTML =
+		"
+			atom-pane-container atom-pane .item-views .pane-item:not(.styleguide) div.panels {\n
+				\tbackground-color:rgba(0, 0, 0, #{alpha / 100});\n
+			}\n
+			atom-pane-container atom-pane .item-views .pane-item:not(.styleguide) div.config-menu {\n
+				\tbackground-color:rgba(0, 0, 0, #{(alpha - 10) / 100});\n
+			}
+		"
 
-    else
-        style = document.createElement("style");
-        style.classList.add("animeDarkUi","setDarkBGSettings");
-        style.innerHTML =
-        "
-            atom-pane-container atom-pane .item-views .pane-item:not(.styleguide) div.panels {\n
-                \tbackground-color:rgba(0, 0, 0, #{alpha / 100});\n
-            }\n
-            atom-pane-container atom-pane .item-views .pane-item:not(.styleguide) div.config-menu {\n
-                \tbackground-color:rgba(0, 0, 0, #{(alpha - 10) / 100});\n
-            }
-        "
-        style.priority = "2"
-        document.querySelector("atom-styles").appendChild(style)
+	else
+		style = document.createElement("style");
+		style.classList.add("animeDarkUi","setDarkBGSettings");
+		style.innerHTML =
+		"
+			atom-pane-container atom-pane .item-views .pane-item:not(.styleguide) div.panels {\n
+				\tbackground-color:rgba(0, 0, 0, #{alpha / 100});\n
+			}\n
+			atom-pane-container atom-pane .item-views .pane-item:not(.styleguide) div.config-menu {\n
+				\tbackground-color:rgba(0, 0, 0, #{(alpha - 10) / 100});\n
+			}
+		"
+		style.priority = "2"
+		document.querySelector("atom-styles").appendChild(style)
 
-    console.log("darkBG-Settings alpha is now #{alpha}%");
+	console.log("darkBG-Settings alpha is now #{alpha}%");
 
 removeDarkBGSettings = () ->
-    document.querySelector("atom-styles").removeChild(document.querySelector("style.animeDarkUi.setDarkBGSettings"));
+	document.querySelector("atom-styles").removeChild(document.querySelector("style.animeDarkUi.setDarkBGSettings"));
+
+
+add_new_bg_entry = (value, index) ->
+	console.log("Adding new entry at index: " + index + " Value: " + value);
+	atom.config.set("#{theme}.dynamicBg. .#{index}", value);
+
