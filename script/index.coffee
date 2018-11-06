@@ -1,6 +1,6 @@
 background_interval = -1;
 currentBackground = -1;
-theme = "anime-dark-plus-ui"
+theme = "elite-dark-pro-ui"
 transTimeout = -1;
 root = document.documentElement;
 newEntryTemp = "";
@@ -11,23 +11,23 @@ module.exports =
 	activate: (state) ->
 		transElm.add();
 
-		submitNewBg = document.getElementById("#{theme}.dynamicBg.submit");
+		# submitNewBg = document.getElementById("#{theme}.backgrounds.submit");
 
-		# window.webContents.executeJavaScript(`document.querySelector('input[id="anime-dark-plus-ui.dynamicBg.submit"]')`, (result) {
+		# window.webContents.executeJavaScript(`document.querySelector('input[id="anime-dark-plus-ui.backgrounds.submit"]')`, (result) {
 		# 		console.log(result)
 		# 	})
 		
-		#submitNewBg = document.querySelector("input[id=\"#{name}.dynamicBg.submit\"]");
+		#submitNewBg = document.querySelector("input[id=\"#{name}.backgrounds.submit\"]");
 
-		console.log(submitNewBg);
+		# console.log(submitNewBg);
 
 		#submitNewBg.type = "button";
 
 		#atom.config.set("#{theme}.arrayTest", ["test1", "test2", "test3"]);
 
-		# testBg = atom.config.get("#{theme}.dynamicBg. .4");
+		# testBg = atom.config.get("#{theme}.backgrounds. .4");
 		
-		# atom.config.set("#{theme}.dynamicBg. .4", "Test4");
+		# atom.config.set("#{theme}.backgrounds. .4", "Test4");
 		
 		# numDynBg = 0;
 		
@@ -79,26 +79,26 @@ module.exports =
 		atom.config.observe "#{theme}.darkObject.dark_settings", (value) ->
 			setDarkBGSettings(value);
 
-		#atom.config.observe "#{theme}.dynamicBg.new", (value) ->
-		atom.config.observe "#{theme}.dynamicBg.submit", (value) ->
+		#atom.config.observe "#{theme}.backgrounds.new", (value) ->
+		atom.config.observe "#{theme}.backgrounds.submit", (value) ->
 			index = 1;
-			newEntry = atom.config.get "#{theme}.dynamicBg.new";
+			newEntry = atom.config.get "#{theme}.backgrounds.new";
 			if(newEntry == undefined || newEntry == "<Enter Image URI>")
 				console.log("Not submitting blank entry");
 				return;
 			
-			entry = atom.config.get "#{theme}.dynamicBg. .#{index}";
+			entry = atom.config.get "#{theme}.backgrounds. .#{index}";
 			while entry != undefined
 				console.log("Entry: " + entry);
 				index++;
-				entry = atom.config.get "#{theme}.dynamicBg. .#{index}";
+				entry = atom.config.get "#{theme}.backgrounds. .#{index}";
 			if(index == undefined)
 				console.log("Error: Index undefined");
 				return;
 			console.log("New Index: " + index);
 			add_new_bg_entry(newEntry, index);
-			atom.config.set "#{theme}.dynamicBg.new", "<Enter Image URI>";
-			atom.config.set "#{theme}.dynamicBg.submit", false;
+			atom.config.set "#{theme}.backgrounds.new", "<Enter Image URI>";
+			atom.config.set "#{theme}.backgrounds.submit", false;
 
 	desactivate: ->
 		transElm.remove();
@@ -180,13 +180,34 @@ unsetTab = () ->
 
 
 set_tab_width = (value) ->
-	root.setAttribute("theme-#{theme}-tabWidth", value.toLowerCase())
+	if(value != undefined)
+		root.setAttribute("theme-#{theme}-tabWidth", value.toLowerCase());
 
 #unset_tab_width = () ->
 #TODO: FIXME
 
 
 # -- set Background -- #
+
+count_backgrounds = () ->
+	index = 1;
+	entry = atom.config.get "#{theme}.backgrounds. .#{index}";
+	while entry != undefined
+		console.log("Entry: " + entry);
+		index++;
+		entry = atom.config.get "#{theme}.backgrounds. .#{index}";
+	return index;
+
+
+submit_background = () ->
+	newEntry = atom.config.get "#{theme}.backgrounds.new";
+	if(newEntry == undefined || newEntry == "<Enter Image URI>")
+		console.log("Not submitting blank entry");
+		return;
+	index = count_backgrounds();
+	add_new_bg_entry(newEntry, index);
+	atom.config.set "#{theme}.backgrounds.new", "<Enter Image URI>";
+	atom.config.set "#{theme}.backgrounds.submit", false;
 
 setBackground = (url) ->
 	if (url != undefined)
@@ -198,18 +219,19 @@ setBackground = (url) ->
 
 
 loadBackground = () ->
-	backgrounds = atom.config.get "#{theme}.backgrounds";
-	i = -1;
+	backgrounds = atom.config.get "#{theme}.backgrounds. ";
+	i = 0;
 	backgrounds.array = [];
-	while i < 10
-		i += 1;
-		backgrounds.array.push(backgrounds[i])
+	
+	while(backgrounds[i] != null && backgrounds[i] != undefined)
+		backgrounds.array.push(backgrounds[i]);
+		++i;
 
 	backgrounds = backgrounds.array;
 
 	# remove "null" parameters
-	backgrounds = backgrounds.filter (f) ->
-		return f && f != "null";
+	# backgrounds = backgrounds.filter (f) ->
+	#	return f && f != "null";
 
 	return backgrounds;
 
@@ -238,9 +260,9 @@ setBGinter = (timer) ->
 			newBackground = Math.floor(Math.random() * backgrounds.length);
 
 		currentBackground = newBackground;
-		setTransition(backgrounds[currentBackground]);
+		setTransition(tempBackgroundsRename[currentBackground]);
 		playTransition();
-		setBackground(backgrounds[currentBackground]);
+		setBackground(tempBackgroundsRename[currentBackground]);
 
 	background_interval = setInterval(
 		()->
@@ -322,5 +344,5 @@ removeDarkBGSettings = () ->
 
 add_new_bg_entry = (value, index) ->
 	console.log("Adding new entry at index: " + index + " Value: " + value);
-	atom.config.set("#{theme}.dynamicBg. .#{index}", value);
+	atom.config.set("#{theme}.backgrounds. .#{index}", value);
 
