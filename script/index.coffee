@@ -5,41 +5,15 @@ transTimeout = -1;
 root = document.documentElement;
 newEntryTemp = "";
 
-
+enableLogging = false if enableLogging == undefined;
 
 module.exports =
 	activate: (state) ->
 		transElm.add();
 
-		# submitNewBg = document.getElementById("#{theme}.backgrounds.submit");
-
 		# window.webContents.executeJavaScript(`document.querySelector('input[id="anime-dark-plus-ui.backgrounds.submit"]')`, (result) {
 		# 		console.log(result)
 		# 	})
-		
-		#submitNewBg = document.querySelector("input[id=\"#{name}.backgrounds.submit\"]");
-
-		# console.log(submitNewBg);
-
-		#submitNewBg.type = "button";
-
-		#atom.config.set("#{theme}.arrayTest", ["test1", "test2", "test3"]);
-
-		# testBg = atom.config.get("#{theme}.backgrounds. .4");
-		
-		# atom.config.set("#{theme}.backgrounds. .4", "Test4");
-		
-		# numDynBg = 0;
-		
-		# while testBg[1][numDynBg] != undefined
-		# 	numDynBg++;
-		
-		# console.log(testBg);
-		
-		# testBg.appendChild("'default': 'null', 'type': 'string'");
-
-		#atom.config.observe "#{theme}.arrayTest", (value) ->
-		#	;
 
 		atom.config.observe "#{theme}.tab", (value) ->
 			setTab(value);
@@ -79,26 +53,10 @@ module.exports =
 		atom.config.observe "#{theme}.darkObject.dark_settings", (value) ->
 			setDarkBGSettings(value);
 
-		#atom.config.observe "#{theme}.backgrounds.new", (value) ->
 		atom.config.observe "#{theme}.backgrounds.submit", (value) ->
-			index = 1;
-			newEntry = atom.config.get "#{theme}.backgrounds.new";
-			if(newEntry == undefined || newEntry == "<Enter Image URI>")
-				console.log("Not submitting blank entry");
-				return;
-			
-			entry = atom.config.get "#{theme}.backgrounds. .#{index}";
-			while entry != undefined
-				console.log("Entry: " + entry);
-				index++;
-				entry = atom.config.get "#{theme}.backgrounds. .#{index}";
-			if(index == undefined)
-				console.log("Error: Index undefined");
-				return;
-			console.log("New Index: " + index);
-			add_new_bg_entry(newEntry, index);
-			atom.config.set "#{theme}.backgrounds.new", "<Enter Image URI>";
-			atom.config.set "#{theme}.backgrounds.submit", false;
+			if(value == true)
+				submit_background();
+			clear_new_bg_box();
 
 	desactivate: ->
 		transElm.remove();
@@ -193,21 +151,36 @@ count_backgrounds = () ->
 	index = 1;
 	entry = atom.config.get "#{theme}.backgrounds. .#{index}";
 	while entry != undefined
-		console.log("Entry: " + entry);
 		index++;
 		entry = atom.config.get "#{theme}.backgrounds. .#{index}";
+	if(enableLogging == true)
+		console.log("Num Backgrounds: " + index);
 	return index;
 
 
+add_new_bg_entry = (value, index) ->
+	if(enableLogging == true)
+		console.log("Adding new entry at index: " + index + " Value: " + value);
+	atom.config.set("#{theme}.backgrounds. .#{index}", value);
+
+clear_new_bg_box = () ->
+	atom.config.set "#{theme}.backgrounds.new", "<Enter Image URI>";
+	atom.config.set "#{theme}.backgrounds.submit", false;
+
 submit_background = () ->
 	newEntry = atom.config.get "#{theme}.backgrounds.new";
-	if(newEntry == undefined || newEntry == "<Enter Image URI>")
-		console.log("Not submitting blank entry");
+	if(newEntry == undefined)
+		if(enableLogging == true)
+			console.log("Not submitting undefined entry");
+		return;
+	if(newEntry == "<Enter Image URI>")
+		if(enableLogging == true)
+			console.log("Not submitting placeholder text");
 		return;
 	index = count_backgrounds();
 	add_new_bg_entry(newEntry, index);
-	atom.config.set "#{theme}.backgrounds.new", "<Enter Image URI>";
-	atom.config.set "#{theme}.backgrounds.submit", false;
+
+
 
 setBackground = (url) ->
 	if (url != undefined)
@@ -249,7 +222,8 @@ unsetBackground = () ->
 # -- timer -- #
 
 setBGinter = (timer) ->
-	console.log("setBGinter() called");
+	if(enableLogging == true)
+		console.log("setBGinter() called");
 	if background_interval != 0
 		clearInterval(background_interval);
 	else
@@ -297,7 +271,8 @@ unsetBGinter = () ->
 
 setDarkBG = (alpha) ->
 	document.querySelector("atom-workspace.workspace.scrollbars-visible-always").style.backgroundColor = "rgba(0, 0, 0, #{alpha / 100})"
-	console.log("darkBG alpha is now #{alpha}%")
+	if(enableLogging)
+		console.log("darkBG alpha is now #{alpha}%")
 
 removeDarkBG = () ->
 	document.querySelector("atom-workspace.workspace.scrollbars-visible-always").style.backgroundColor = "unset"
@@ -335,14 +310,9 @@ setDarkBGSettings = (alpha) ->
 		"
 		style.priority = "2"
 		document.querySelector("atom-styles").appendChild(style)
-
-	console.log("darkBG-Settings alpha is now #{alpha}%");
+	if(enableLogging == true)
+		console.log("darkBG-Settings alpha is now #{alpha}%");
 
 removeDarkBGSettings = () ->
 	document.querySelector("atom-styles").removeChild(document.querySelector("style.animeDarkUi.setDarkBGSettings"));
-
-
-add_new_bg_entry = (value, index) ->
-	console.log("Adding new entry at index: " + index + " Value: " + value);
-	atom.config.set("#{theme}.backgrounds. .#{index}", value);
 

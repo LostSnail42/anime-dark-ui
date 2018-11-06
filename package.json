@@ -3,7 +3,7 @@
 	"theme": "ui",
 	"version": "1.1.1",
 	"description" :
-		"An Anime dark ui theme with enhancements - Forked from anime-dark-ui",
+		"A dark UI with slideshow support and enhancements - Forked from anime-dark-ui",
 	"keywords" :
 	[
 		"ui",
@@ -11,7 +11,10 @@
 		"pro",
 		"theme",
 		"anime",
-		"dark"
+		"dark",
+		"slideshow",
+		"image",
+		"background"
 	],
 	"main": "script/index",
 	"repository": "https://github.com/LostSnail42/elite-dark-pro-ui",
@@ -32,23 +35,24 @@
 				"new" :
 				{
 					"title": "Add a new entry: ",
-					"description": "Enter a new entry path to add it to the list.",
+					"description": "Enter a path and click *Submit* to add it.<br >&nbsp;&nbsp;&nbsp;&nbsp;<small>\\*It will be usable immediately and visible on the next reload of the *Settings* page.</small>",
+					"note": "Test",
 					"order": 1,
 					"type": "string",
 					"default": "<Enter Image URI>"
 				},
-				"submit":
+				"submit" :
 				{
 					"title": "Submit",
-					"order": "1",
+					"order": "2",
 					"type": "boolean",
 					"default": "false"
 				},
 				" " :
 				{
-					"title": "Currently enabled BGs.",
+					"title": "Currently enabled backgrounds.",
 					"description": "These are currently in the slideshow.",
-					"order": 2,
+					"order": 3,
 					"type": "object",
 					"properties":
 					{
