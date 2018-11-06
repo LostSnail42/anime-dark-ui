@@ -1,5 +1,5 @@
 {
-	"name": "anime-dark-plus-ui",
+	"name": "elite-dark-pro-ui",
 	"theme": "ui",
 	"version": "0.0.0",
 	"description" :
@@ -7,12 +7,14 @@
 	"keywords" :
 	[
 		"ui",
+		"elite",
+		"pro",
 		"theme",
 		"anime",
 		"dark"
 	],
 	"main": "script/index",
-	"repository": "https://github.com/LostSnail42/anime-dark-plus-ui",
+	"repository": "https://github.com/LostSnail42/elite-dark-pro-ui",
 	"license": "MIT",
 	"engines" :
 	{
