@@ -150,7 +150,7 @@ set_tab_width = (value) ->
 count_backgrounds = () ->
 	index = 1;
 	entry = atom.config.get "#{theme}.backgrounds. .#{index}";
-	while entry != undefined
+	while entry != undefined && entry != null
 		index++;
 		entry = atom.config.get "#{theme}.backgrounds. .#{index}";
 	if(enableLogging == true)
@@ -193,18 +193,20 @@ setBackground = (url) ->
 
 loadBackground = () ->
 	backgrounds = atom.config.get "#{theme}.backgrounds. ";
-	i = 0;
+	i = 1;
 	backgrounds.array = [];
-	
-	while(backgrounds[i] != null && backgrounds[i] != undefined)
-		backgrounds.array.push(backgrounds[i]);
-		++i;
+	entry = atom.config.get "#{theme}.backgrounds. .#{i}";
+	while(entry != undefined)
+		backgrounds.array.push(entry);
+		if(enableLogging == true)
+			console.log("Backgrounds[" + i + "]: " + entry);
+		entry = atom.config.get "#{theme}.backgrounds. .#{++i}";
 
 	backgrounds = backgrounds.array;
 
 	# remove "null" parameters
-	# backgrounds = backgrounds.filter (f) ->
-	#	return f && f != "null";
+	backgrounds = backgrounds.filter (f) ->
+		return f && f != "null";
 
 	return backgrounds;
 
@@ -234,9 +236,9 @@ setBGinter = (timer) ->
 			newBackground = Math.floor(Math.random() * backgrounds.length);
 
 		currentBackground = newBackground;
-		setTransition(tempBackgroundsRename[currentBackground]);
+		setTransition(backgrounds[currentBackground]);
 		playTransition();
-		setBackground(tempBackgroundsRename[currentBackground]);
+		setBackground(backgrounds[currentBackground]);
 
 	background_interval = setInterval(
 		()->

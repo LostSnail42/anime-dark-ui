@@ -78,7 +78,7 @@
 				"dark" :
 				{
 					"title": "Background tint percentage",
-					"description": "The alpha percentage for black color background (over the background-image).",
+					"description": "The alpha percentage for the background tint.",
 					"order": 1,
 					"type": "integer",
 					"default": 70,
@@ -88,7 +88,7 @@
 				"dark_settings" :
 				{
 					"title": "Settings background tint percentage",
-					"description": "Same as **Background tint percentage** but for the settings panel.",
+					"description": "Same as *Background tint percentage* but for the settings panel.",
 					"order": 2,
 					"type": "integer",
 					"default": 80,
@@ -107,7 +107,7 @@
 				"timer" :
 				{
 					"title": "Slideshow timer",
-					"description": "Time in minutes before the background is switched. Set to 0 to have a random background at window start.",
+					"description": "Time in minutes before the background is switched.<br />&nbsp;&nbsp;&nbsp;&nbsp;<small>\\*Set to 0 to have a random background at window start.</small>",
 					"type": "integer",
 					"default": 0,
 					"order": 1,
