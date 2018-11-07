@@ -1,6 +1,6 @@
 background_interval = -1;
 currentBackground = -1;
-theme = "elite-dark-pro-ui"
+theme = "perfect-dark-pro-ui"
 transTimeout = -1;
 root = document.documentElement;
 newEntryTemp = "";
@@ -11,7 +11,7 @@ module.exports =
 	activate: (state) ->
 		transElm.add();
 
-		# window.webContents.executeJavaScript(`document.querySelector('input[id="anime-dark-plus-ui.backgrounds.submit"]')`, (result) {
+		# window.webContents.executeJavaScript(`document.querySelector('input[id="perfect-dark-pro-ui.backgrounds.submit"]')`, (result) {
 		# 		console.log(result)
 		# 	})
 
