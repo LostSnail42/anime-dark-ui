@@ -2,8 +2,10 @@
 	"name": "perfect-dark-pro-ui",
 	"theme": "ui",
 	"version": "1.2.0",
-	"description": "A dark UI with slideshow support and enhancements - Forked from anime-dark-ui",
-	"keywords": [
+	"description" :
+		"A dark UI with slideshow support and enhancements - Forked from anime-dark-ui",
+	"keywords" :
+	[
 		"ui",
 		"elite",
 		"pro",
@@ -17,16 +19,21 @@
 	"main": "script/index",
 	"repository": "https://github.com/LostSnail42/perfect-dark-pro-ui",
 	"license": "MIT",
-	"engines": {
+	"engines" :
+	{
 		"atom": ">=1.0.0 "
 	},
-	"configSchema": {
-		"backgrounds": {
+	"configSchema" :
+	{
+		"backgrounds" :
+		{
 			"title": "Backgrounds",
 			"type": "object",
 			"order": 1,
-			"properties": {
-				"new": {
+			"properties" :
+			{
+				"new" :
+				{
 					"title": "Add a new entry: ",
 					"description": "Enter a path and click *Submit* to add it.<br >&nbsp;&nbsp;&nbsp;&nbsp;<small>\\*It will be usable immediately and visible on the next reload of the *Settings* page.</small>",
 					"note": "Test",
@@ -34,18 +41,21 @@
 					"type": "string",
 					"default": "<Enter Image URI>"
 				},
-				"submit": {
+				"submit" :
+				{
 					"title": "Submit",
 					"order": "2",
 					"type": "boolean",
 					"default": "false"
 				},
-				" ": {
+				" " :
+				{
 					"title": "Currently enabled backgrounds.",
 					"description": "These are currently in the slideshow.",
 					"order": 3,
 					"type": "object",
-					"properties": {
+					"properties":
+					{
 						"1": {
 							"default": "https://wallpapersite.com/images/wallpapers/anime-girl-3840x2160-fire-angel-4k-8040.jpg",
 							"type": "string"
@@ -58,12 +68,15 @@
 				}
 			}
 		},
-		"darkObject": {
+		"darkObject" :
+		{
 			"order": 2,
 			"title": "Tint",
 			"type": "object",
-			"properties": {
-				"dark": {
+			"properties" :
+			{
+				"dark" :
+				{
 					"title": "Background tint percentage",
 					"description": "The alpha percentage for the background tint.",
 					"order": 1,
@@ -72,7 +85,8 @@
 					"minimum": "0",
 					"maximum": "100"
 				},
-				"dark_settings": {
+				"dark_settings" :
+				{
 					"title": "Settings background tint percentage",
 					"description": "Same as *Background tint percentage* but for the settings panel.",
 					"order": 2,
@@ -83,12 +97,15 @@
 				}
 			}
 		},
-		"timing": {
+		"timing" :
+		{
 			"order": 3,
 			"title": "Slideshow Settings",
 			"type": "object",
-			"properties": {
-				"timer": {
+			"properties" :
+			{
+				"timer" :
+				{
 					"title": "Slideshow timer",
 					"description": "Time in minutes before the background is switched.<br />&nbsp;&nbsp;&nbsp;&nbsp;<small>\\*Set to 0 to have a random background at window start.</small>",
 					"type": "integer",
@@ -97,7 +114,8 @@
 					"minimum": "0",
 					"maximum": "60"
 				},
-				"transiton": {
+				"transiton" :
+				{
 					"title": "Transition duration",
 					"description": "The duration of the background transition in seconds",
 					"type": "number",
@@ -108,23 +126,27 @@
 				}
 			}
 		},
-		"tab": {
+		"tab" :
+		{
 			"title": "Tab Size",
 			"description": "Change the tab height for the UI.",
 			"type": "string",
 			"default": "soft",
-			"enum": [
+			"enum" :
+			[
 				"soft",
 				"large"
 			],
 			"order": 4
 		},
-		"tabWidth": {
+		"tabWidth" :
+		{
 			"title": "Tab Width",
 			"description": "Change the tab width for the UI.",
 			"type": "string",
 			"default": "full",
-			"enum": [
+			"enum" :
+			[
 				"minimum",
 				"full"
 			],
