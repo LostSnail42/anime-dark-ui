@@ -276,9 +276,13 @@ unsetBGinter = () ->
 # -- Background color opacity -- #
 
 setDarkBG = (alpha) ->
-	document.querySelector("atom-workspace.workspace.scrollbars-visible-always").style.backgroundColor = "rgba(0, 0, 0, #{alpha / 100})"
+	backgroundElement = document.querySelector("atom-workspace.workspace.scrollbars-visible-always");
+	if(backgroundElement != null)
+		backgroundElement.style.backgroundColor = "rgba(0, 0, 0, #{alpha / 100})";
+	else
+		console.error("Failed to set background tint, element was null!");
 	if(enableLogging)
-		console.log("darkBG alpha is now #{alpha}%")
+		console.log("darkBG alpha is now #{alpha}%");
 
 removeDarkBG = () ->
 	document.querySelector("atom-workspace.workspace.scrollbars-visible-always").style.backgroundColor = "unset"
