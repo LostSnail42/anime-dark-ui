@@ -1,0 +1,95 @@
+
+// Base
+// -------------------
+
+// Used for global styles
+// Or to override certain Atom core styles
+
+// -------------------
+
+@ui-theme-name: perfect-dark-pro-ui;
+
+@pdpu-tint-color: rgb(0,0,0);
+
+@invisible: rgba(0,0,0,0);
+@tint: fade(@pdpu-tint-color, .05);
+
+.index-views
+{
+	background: @invisible;
+}
+
+.item-views
+{
+	background: @invisible;
+}
+
+@theme-tabWidth: ~'theme-@{ui-theme-name}-tabWidth';
+
+*
+{
+	background: @invisible;
+}
+
+// html {
+// 	background-size: cover;
+// 	position: fixed;
+// 	opacity: 1;
+// }
+
+body
+{
+	font-size: @font-size;
+	color: @text-color;
+	background-color: @app-background-color;
+	background: @invisible;
+	background-size: cover;
+	position: fixed;
+	// opacity: 1;
+	// width: -webkit-fill-available;
+	// height: -webkit-fill-available;
+}
+
+
+atom-pane
+{
+	background: @invisible;
+	border-right: 1px solid @base-border-color;
+	&:last-child
+	{
+		border-right: none;
+	}
+}
+
+
+
+::-webkit-scrollbar-track
+{
+	background: rgba(40, 44, 52, 0);
+	// background: rgba(40, 44, 52, 0);
+}
+
+::-webkit-scrollbar-thumb
+{
+	border-color: rgb(0, 0, 0, 0);
+	background: #7cf8ae;
+	border-radius:10px;
+}
+
+::-webkit-scrollbar-corner
+{
+	background: rgba(40, 44, 52, 0);
+}
+
+::-webkit-scrollbar
+{
+	width:5px;
+	height:5px;
+}
+
+::-webkit-scrollbar-thumb
+{
+	border:none;
+	background:#7cf8ae;
+}
+

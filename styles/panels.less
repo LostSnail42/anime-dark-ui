@@ -1,0 +1,48 @@
+
+// Panels
+// -------------------
+
+// Overrides: atom/static/panels.less
+
+.tool-panel, .panel, atom-panel
+{
+	background: @invisible;
+}
+
+.panel-heading
+{
+	background: @invisible;
+	border-bottom: 1px solid @panel-heading-border-color;
+	background-color: @panel-heading-background-color;
+}
+
+.inset-panel
+{
+	background: @invisible;
+	background-color: @inset-panel-background-color;
+	.panel-heading
+	{
+		background-color: lighten(@inset-panel-background-color, 4%);
+	}
+}
+
+.panels-item
+{
+	background: @invisible;
+}
+
+.focusable-panel
+{
+	background: @invisible;
+}
+
+// Modal -------------------
+// Used on top of the editor, like the Command Palette.
+
+atom-panel.modal
+{
+	border: 1px solid @overlay-border-color;
+	border-top: none;
+	box-shadow: 0 2px 8px 1px hsla(0,0%,0%,.3);
+	background: @invisible;
+}
