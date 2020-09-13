@@ -12,23 +12,26 @@
 @pdpu-tint-color: rgb(0,0,0);
 
 @invisible: rgba(0,0,0,0);
-@tint: fade(@pdpu-tint-color, .05);
+@tint: fade(@invisible, 1);
+// @tint: fade(@pdpu-tint-color, ~('theme-@{ui-theme-name}-darkObject-dark') / 10);
+// @tint: fade(@pdpu-tint-color, 'theme-@{ui-theme-name}-darkObject-dark' / 10);
+// @tint: fade(@pdpu-tint-color, 2.5);
 
 .index-views
 {
-	background: @invisible;
+	background: @tint;
 }
 
 .item-views
 {
-	background: @invisible;
+	background: @tint;
 }
 
 @theme-tabWidth: ~'theme-@{ui-theme-name}-tabWidth';
 
 *
 {
-	background: @invisible;
+	background: @tint;
 }
 
 // html {
@@ -42,7 +45,7 @@ body
 	font-size: @font-size;
 	color: @text-color;
 	background-color: @app-background-color;
-	background: @invisible;
+	background: @tint;
 	background-size: cover;
 	position: fixed;
 	// opacity: 1;
@@ -53,7 +56,7 @@ body
 
 atom-pane
 {
-	background: @invisible;
+	background: @tint;
 	border-right: 1px solid @base-border-color;
 	&:last-child
 	{
@@ -83,7 +86,9 @@ atom-pane
 
 ::-webkit-scrollbar
 {
-	width:5px;
+	// margin: none;
+	// width: "@theme-{ui-theme-name}-scrollWidth";
+	width: 5px;
 	height:5px;
 }
 

@@ -151,6 +151,14 @@
 				"full"
 			],
 			"order": 5
+		},
+		"scrollWidth" :
+		{
+			"title" : "Scroll Bar Width",
+			"description" : "Change the width of the scrollbars.",
+			"type" : "number",
+			"default" : "5",
+			"order": 6
 		}
 	}
 }

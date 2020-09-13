@@ -7,12 +7,12 @@
 
 atom-tabs
 {
-	background: @invisible;
+	background: @tint;
 }
 
 .tab-bar
 {
-	background: @invisible;
+	background: @tint;
 	background-color: @tab-bar-background-color;
 	border-bottom: 1px solid @base-border-color;
 	overflow-x: auto;
@@ -20,7 +20,7 @@ atom-tabs
 
 	.tab
 	{
-		background: @invisible;
+		background: @tint;
 		color: @text-color;
 		height: @tab-height;
 		line-height: @tab-height;
@@ -80,4 +80,40 @@ atom-tabs
 	{
 		flex: 0 0 auto;
 	}
+}
+
+[@{theme-tabWidth}="full"] .tab-bar
+{
+	.tab,
+	.tab.active
+	{
+		min-height: @font-size;
+		// max-height: auto;
+		min-width: 2.5em;
+		// max-width: none;
+	}
+}
+
+.tab-bar[h="22px"]
+{
+	padding-top: 0;
+	margin-top: 0;
+	height: 24px + ~"@theme-{ui-theme-name}-scrollWidth"px - 15px;
+	// height: 22px + 6px;
+	.icon::before
+	{
+		// font-size: 14px;
+		// top: 10px;
+	}
+
+	// div
+	// {
+	// 	// font-size: 13px;
+	// }
+
+	// .tab.modified:not(:hover) .close-icon
+	// {
+	// 	top: 7px;
+	// 	bottom: 7px;
+	// }
 }
