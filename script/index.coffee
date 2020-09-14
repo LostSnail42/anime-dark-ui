@@ -295,8 +295,8 @@ removeDarkBG = () ->
 # -- Setting Background color opacity -- #
 
 setDarkBGSettings = (alpha) ->
-	if document.querySelector("style.animeDarkUi.setDarkBGSettings")
-		document.querySelector("style.animeDarkUi.setDarkBGSettings").innerHTML =
+	if document.querySelector("style.perfectDarkProUi.setDarkBGSettings")
+		document.querySelector("style.perfectDarkProUi.setDarkBGSettings").innerHTML =
 		"
 			atom-pane-container atom-pane .item-views .pane-item:not(.styleguide) div.panels {\n
 				\tbackground-color:rgba(0, 0, 0, #{alpha / 100});\n
@@ -308,7 +308,7 @@ setDarkBGSettings = (alpha) ->
 
 	else
 		style = document.createElement("style");
-		style.classList.add("animeDarkUi","setDarkBGSettings");
+		style.classList.add("perfectDarkProUi","setDarkBGSettings");
 		style.innerHTML =
 		"
 			atom-pane-container atom-pane .item-views .pane-item:not(.styleguide) div.panels {\n
@@ -324,5 +324,5 @@ setDarkBGSettings = (alpha) ->
 		console.log("darkBG-Settings alpha is now #{alpha}%");
 
 removeDarkBGSettings = () ->
-	document.querySelector("atom-styles").removeChild(document.querySelector("style.animeDarkUi.setDarkBGSettings"));
+	document.querySelector("atom-styles").removeChild(document.querySelector("style.perfectDarkProUi.setDarkBGSettings"));
 
