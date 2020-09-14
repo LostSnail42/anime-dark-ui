@@ -15,11 +15,12 @@
 {
 	color: @text-color;
 	background: @tint;
-	background-color: @tint;// @tree-view-background-color;
+	background-color: @tint; //@tree-view-background-color;
 
 	.list-item.selected
 	{
-		background: @tint;
+		// background: @tint;
+		background: lighten(@highlights-background-color, 20%);
 		color: @text-color-selected;
 	}
 }

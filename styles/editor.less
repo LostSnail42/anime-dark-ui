@@ -4,6 +4,31 @@
 atom-text-editor
 {
 	background: @tint;
+	// background: @invisible;
+}
+
+
+//Selection
+atom-text-editor div div.scroll-view div div.lines div.highlights *
+{
+	// color: lighten(inherit);
+	background-color:@highlights-background-color;
+	// border: @highlights-border; // border-color: @highlights-border-color;
+}
+
+//background
+atom-text-editor .gutter
+{
+	.line-number{ color: lighten(@syntax-gutter-text-color, 30%); }
+	background-color: @number-bar-default-background;
+}
+
+//background when selection || selected
+atom-text-editor .gutter .line-number.cursor-line
+{
+	color: @number-bar-selected-color;
+	background-color: @number-bar-selected-background;
+	border-right: @number-bar-selected-border-right;
 }
 
 // Mini Editor
@@ -18,6 +43,7 @@ atom-text-editor[mini]
 	color: @text-color;
 	border-radius: @component-border-radius;
 	background-color: @input-background-color;
+
 
 	&.is-focused
 	{

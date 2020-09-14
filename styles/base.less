@@ -11,8 +11,9 @@
 
 @pdpu-tint-color: rgb(0,0,0);
 
-@invisible: rgba(0,0,0,0);
-@tint: fade(@invisible, 1);
+// @invisible: rgba(0,0,0,0);
+// // @tint: fade(@invisible, 2.5%);
+// @tint: fade(@invisible, 5%);
 // @tint: fade(@pdpu-tint-color, ~('theme-@{ui-theme-name}-darkObject-dark') / 10);
 // @tint: fade(@pdpu-tint-color, 'theme-@{ui-theme-name}-darkObject-dark' / 10);
 // @tint: fade(@pdpu-tint-color, 2.5);
@@ -22,16 +23,18 @@
 	background: @tint;
 }
 
-.item-views
-{
-	background: @tint;
-}
+// .item-views
+// {
+// 	background: @tint;
+// }
 
 @theme-tabWidth: ~'theme-@{ui-theme-name}-tabWidth';
 
 *
 {
-	background: @tint;
+	// background: @tint;
+	// background: @invisible;
+	// background-color: @invisible;
 }
 
 // html {
@@ -43,9 +46,10 @@
 body
 {
 	font-size: @font-size;
-	color: @text-color;
-	background-color: @app-background-color;
-	background: @tint;
+	// color: @text-color;
+	// background-color: @app-background-color;
+	// background-color: @tint;
+	// background: @tint;
 	background-size: cover;
 	position: fixed;
 	// opacity: 1;
@@ -64,6 +68,11 @@ atom-pane
 	}
 }
 
+
+// .has-selection
+// {
+// 	background: @tint;
+// }
 
 
 ::-webkit-scrollbar-track

@@ -10,13 +10,18 @@
 // Try to edit some of the values below to see your theme change.
 // A good start is to change the color of the `@base-background-color` variable.
 
+@invisible: rgba(0,0,0,0);
+// @tint: fade(@invisible, 2.5%);
+@tint: fade(@invisible, 5%);
 
 // Text Colors
 @text-color:           hsl(0,0%,66%);
 // @text-color:           rgb(255, 255, 255);
 @text-color-subtle:    hsl(0,0%,50%);
-@text-color-highlight: hsl(0,0%,94%);
+// @text-color-highlight: hsl(0,0%,94%);
+@text-color-highlight: hsla(0,0%,94%, 50%);
 @text-color-selected:  hsl(0,0%,100%);
+// @text-color-selected:  @invisible;
 
 @text-color-info:    hsl(219,  79%, 66%);
 @text-color-success: hsl(140,  44%, 62%);
@@ -24,18 +29,24 @@
 @text-color-error:   hsl(  9, 100%, 64%);
 
 // Background colors
-@background-color-info:    hsl(208, 100%, 50%);
-@background-color-success: hsl(160,  70%, 36%);
-@background-color-warning: hsl(32,   60%, 50%);
-@background-color-error:   hsl(0,    70%, 50%);
+@background-color-info:    hsla(208, 100%, 50%, 80%);
+@background-color-success: hsla(160,  70%, 36%, 80%);
+@background-color-warning: hsla(32,   60%, 50%, 80%);
+@background-color-error:   hsla(0,    70%, 50%, 80%);
+
+
+// Base colors
+@base-background-color-raw: hsl(222,6%,22%);
+@base-background-color: hsla(0,0%,0%,25%);
+@base-border-color:     fadein(darken(@base-background-color, 8%), 100%);
+@base-border-color-green: rgba(0, 255, 90,0.5);
 
 @background-color-highlight: lighten(@base-background-color, 5%);
 @background-color-selected:  lighten(@base-background-color, 10%);
 @app-background-color:       darken(@base-background-color, 5%);
 
-// Base colors
-@base-background-color: hsl(222,6%,22%);
-@base-border-color:     darken(@base-background-color, 8%);
+@highlights-background-color: hsla(0, 0%, 10%, 70%);
+@highlights-border: rgba(0, 255, 90,0.5) solid 1px;
 
 // Component colors
 @pane-item-background-color: @base-background-color;
@@ -56,7 +67,13 @@
 @overlay-background-color: lighten(@base-background-color, 5%);
 @overlay-border-color:     @base-border-color;
 
-@button-background-color:          lighten(@base-background-color, 10%);
+@number-bar-default-background : hsla(0%,0%,0%,30%);
+
+@number-bar-selected-color : #85f18f;
+@number-bar-selected-background : hsla(170, 100%, 50%, 0.1);
+@number-bar-selected-border-right : @base-border-color-green solid 1px;
+
+@button-background-color:          fadein(lighten(@base-background-color, 10%), 30%);
 @button-background-color-hover:    lighten(@button-background-color, 12%);
 @button-background-color-selected: @button-background-color-hover;
 @button-border-color:              @base-border-color;
