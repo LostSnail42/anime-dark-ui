@@ -58,7 +58,7 @@ module.exports =
 				submit_background();
 			clear_new_bg_box();
 
-	desactivate: ->
+	deactivate: ->
 		transElm.remove();
 		unsetTab();
 		unsetBGinter();
@@ -300,9 +300,11 @@ setDarkBGSettings = (alpha) ->
 		"
 			atom-pane-container atom-pane .item-views .pane-item:not(.styleguide) div.panels {\n
 				\tbackground-color:rgba(0, 0, 0, #{alpha / 100});\n
+				\tmin-width: fit-content;\n
 			}\n
 			atom-pane-container atom-pane .item-views .pane-item:not(.styleguide) div.config-menu {\n
 				\tbackground-color:rgba(0, 0, 0, #{(alpha - 10) / 100});\n
+				\tmin-width: fit-content;\n
 			}
 		"
 
@@ -313,9 +315,11 @@ setDarkBGSettings = (alpha) ->
 		"
 			atom-pane-container atom-pane .item-views .pane-item:not(.styleguide) div.panels {\n
 				\tbackground-color:rgba(0, 0, 0, #{alpha / 100});\n
+				\tmin-width: fit-content;\n
 			}\n
 			atom-pane-container atom-pane .item-views .pane-item:not(.styleguide) div.config-menu {\n
 				\tbackground-color:rgba(0, 0, 0, #{(alpha - 10) / 100});\n
+				\tmin-width: fit-content;\n
 			}
 		"
 		style.priority = "2"

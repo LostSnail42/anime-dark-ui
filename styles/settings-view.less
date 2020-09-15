@@ -4,7 +4,26 @@
 // 	background: @tint;
 // }
 
-atom-pane-container atom-pane .item-views .pane-item{
+.settings-view
+{
+	ol.breadcrumb
+	{
+		white-space: nowrap;
+	}
+
+	&.pane-item
+	{
+		overflow: auto;
+	}
+}
+
+atom-pane-container atom-pane .item-views .pane-item
+{
 	background-color: @tint;
+}
+
+.package-container .row
+{
+	background: lighten(@tint, 100%);
 }
 
