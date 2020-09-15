@@ -5,11 +5,20 @@ transTimeout = -1;
 root = document.documentElement;
 newEntryTemp = "";
 
+backgrounds = "";
+
 enableLogging = false if enableLogging == undefined;
 
 module.exports =
 	activate: (state) ->
 		transElm.add();
+
+		backgrounds = loadBackground();
+
+		newBackground = Math.floor(Math.random() * backgrounds.length);
+		currentBackground = newBackground;
+		setBackground(backgrounds[newBackground]);
+		setTransition(backgrounds[newBackground]);
 
 		# window.webContents.executeJavaScript(`document.querySelector('input[id="perfect-dark-pro-ui.backgrounds.submit"]')`, (result) {
 		# 		console.log(result)
@@ -21,8 +30,6 @@ module.exports =
 			set_tab_width(value);
 
 		atom.config.observe "#{theme}.timing.timer", (timer) ->
-
-			backgrounds = loadBackground();
 
 			# -- Timer > 0 -- #
 			if timer != 0 && backgrounds.length != 0
